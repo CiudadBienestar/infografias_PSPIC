@@ -1,0 +1,1 @@
+// Lógica de carga, filtros y visualización irá aquí

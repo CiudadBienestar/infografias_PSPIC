@@ -1,0 +1,1 @@
+// Configuración de columnas y pestañas
