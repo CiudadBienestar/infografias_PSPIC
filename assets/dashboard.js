@@ -257,6 +257,7 @@ function renderGender(containerId, datasetKey) {
   const female = data.filter((r) => r[column]?.toLowerCase().trim() === "mujer").length;
 
   const total = male + female;
+  document.getElementById(`${datasetKey}SexoCount`).textContent = total;
   container.querySelector(".male-count").textContent = male;
   container.querySelector(".female-count").textContent = female;
 
