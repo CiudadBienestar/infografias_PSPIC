@@ -38,7 +38,9 @@ let filteredData = { acciones: [], procesos: [] };
 
 async function loadData() {
   const urls = Object.entries(SHEETS).map(([key, sheet]) =>
-    fetch(`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&gid=${sheet.gid}`)
+    fetch(
+      `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&gid=${sheet.gid}`
+    )
       .then((r) => r.text())
       .then((csv) => ({ key, data: Papa.parse(csv, { header: true }).data }))
   );
@@ -50,7 +52,9 @@ async function loadData() {
 }
 
 function getActiveTab() {
-  return document.querySelector(".tab-button.active")?.dataset.tab || "acciones";
+  return (
+    document.querySelector(".tab-button.active")?.dataset.tab || "acciones"
+  );
 }
 
 function populateFilters() {
@@ -102,9 +106,12 @@ function applyFiltersAndRender() {
 }
 
 function updateSummaries() {
-  document.getElementById("totalAcciones").textContent = filteredData.acciones.length;
-  document.getElementById("totalProcesos").textContent = filteredData.procesos.length;
-  document.getElementById("totalParticipantes").textContent = filteredData.acciones.length + filteredData.procesos.length;
+  document.getElementById("totalAcciones").textContent =
+    filteredData.acciones.length;
+  document.getElementById("totalProcesos").textContent =
+    filteredData.procesos.length;
+  document.getElementById("totalParticipantes").textContent =
+    filteredData.acciones.length + filteredData.procesos.length;
 
   const zonas = new Set();
   [...filteredData.acciones, ...filteredData.procesos].forEach((row) => {
@@ -116,24 +123,99 @@ function updateSummaries() {
 }
 
 function renderCharts() {
-  renderChart("accionesCursoChart", "Curso de Vida", filteredData.acciones, SHEETS.acciones.columns.curso, "accionesCursoCount");
+  renderChart(
+    "accionesCursoChart",
+    "Curso de Vida",
+    filteredData.acciones,
+    SHEETS.acciones.columns.curso,
+    "accionesCursoCount"
+  );
   renderGender("accionesSexoContainer", "acciones");
-  renderChart("accionesEtniaChart", "Etnia", filteredData.acciones, SHEETS.acciones.columns.etnia, "accionesEtniaCount");
-  renderChart("accionesZonaChart", "Zona", filteredData.acciones, SHEETS.acciones.columns.zona, "accionesZonaCount", "doughnut");
-  renderChart("accionesComunaChart", "Comuna/Corregimiento", filteredData.acciones, SHEETS.acciones.columns.comuna, "accionesComunaCount");
+  renderChart(
+    "accionesEtniaChart",
+    "Etnia",
+    filteredData.acciones,
+    SHEETS.acciones.columns.etnia,
+    "accionesEtniaCount"
+  );
+  renderChart(
+    "accionesZonaChart",
+    "Zona",
+    filteredData.acciones,
+    SHEETS.acciones.columns.zona,
+    "accionesZonaCount",
+    "doughnut"
+  );
+  renderChart(
+    "accionesComunaChart",
+    "Comuna/Corregimiento",
+    filteredData.acciones,
+    SHEETS.acciones.columns.comuna,
+    "accionesComunaCount"
+  );
 
-  renderChart("procesosCursoChart", "Curso de Vida", filteredData.procesos, SHEETS.procesos.columns.curso, "procesosCursoCount");
+  renderChart(
+    "procesosCursoChart",
+    "Curso de Vida",
+    filteredData.procesos,
+    SHEETS.procesos.columns.curso,
+    "procesosCursoCount"
+  );
   renderGender("procesosIdentificaContainer", "procesos");
-  renderChart("procesosPreferenciaChart", "Preferencia Sexual", filteredData.procesos, SHEETS.procesos.columns.preferencia, "procesosPreferenciaCount");
-  renderChart("procesosEtniaChart", "Etnia", filteredData.procesos, SHEETS.procesos.columns.etnia, "procesosEtniaCount");
-  renderChart("procesosEscolaridadChart", "Escolaridad", filteredData.procesos, SHEETS.procesos.columns.escolaridad, "procesosEscolaridadCount");
-  renderChart("procesosDiscapacidadChart", "Discapacidad", filteredData.procesos, SHEETS.procesos.columns.discapacidad, "procesosDiscapacidadCount");
-  renderChart("procesosZonaChart", "Zona", filteredData.procesos, SHEETS.procesos.columns.zona, "procesosZonaCount", "doughnut");
-  renderChart("procesosComunaChart", "Comuna/Corregimiento", filteredData.procesos, SHEETS.procesos.columns.comuna, "procesosComunaCount");
-  renderChart("procesosSaludChart", "Tipo de Afiliación a Salud", filteredData.procesos, SHEETS.procesos.columns.salud, "procesosSaludCount", "pie");
+  renderChart(
+    "procesosPreferenciaChart",
+    "Preferencia Sexual",
+    filteredData.procesos,
+    SHEETS.procesos.columns.preferencia,
+    "procesosPreferenciaCount"
+  );
+  renderChart(
+    "procesosEtniaChart",
+    "Etnia",
+    filteredData.procesos,
+    SHEETS.procesos.columns.etnia,
+    "procesosEtniaCount"
+  );
+  renderChart(
+    "procesosEscolaridadChart",
+    "Escolaridad",
+    filteredData.procesos,
+    SHEETS.procesos.columns.escolaridad,
+    "procesosEscolaridadCount"
+  );
+  renderChart(
+    "procesosDiscapacidadChart",
+    "Discapacidad",
+    filteredData.procesos,
+    SHEETS.procesos.columns.discapacidad,
+    "procesosDiscapacidadCount"
+  );
+  renderChart(
+    "procesosZonaChart",
+    "Zona",
+    filteredData.procesos,
+    SHEETS.procesos.columns.zona,
+    "procesosZonaCount",
+    "doughnut"
+  );
+  renderChart(
+    "procesosComunaChart",
+    "Comuna/Corregimiento",
+    filteredData.procesos,
+    SHEETS.procesos.columns.comuna,
+    "procesosComunaCount"
+  );
+  renderChart(
+    "procesosSaludChart",
+    "Tipo de Afiliación a Salud",
+    filteredData.procesos,
+    SHEETS.procesos.columns.salud,
+    "procesosSaludCount",
+    "pie"
+  );
 }
 
-function renderChart(id, label, data, column, counterId, type = 'bar') {
+function renderChart(id, label, data, column, counterId, type = "bar") {
   const ctx = document.getElementById(id)?.getContext("2d");
   if (!ctx) return;
 
@@ -160,35 +242,49 @@ function renderChart(id, label, data, column, counterId, type = 'bar') {
   // Acortar etiquetas largas
   const labels = sortedEntries.map(([label]) => {
     if (label.length > 15) {
-      return label.substring(0, 12) + '...';
+      return label.substring(0, 12) + "...";
     }
     return label;
   });
-  
+
   const values = sortedEntries.map(([_, count]) => count);
   const percentages = values.map((v) => ((v / total) * 100).toFixed(1) + "%");
 
   if (charts[id]) charts[id].destroy();
 
   const multiColors = [
-    '#0072ce', '#00b5e2', '#00a878', '#f4a261',
-    '#e76f51', '#e63946', '#ffb703', '#6d597a'
+    "#0072ce",
+    "#00b5e2",
+    "#00a878",
+    "#f4a261",
+    "#e76f51",
+    "#e63946",
+    "#ffb703",
+    "#6d597a",
   ];
 
-  const bgColor = (type === 'pie' || type === 'doughnut') ? multiColors : 'rgba(0, 114, 206, 0.7)';
-  const borderColor = (type === 'pie' || type === 'doughnut') ? multiColors : 'rgba(0, 114, 206, 1)';
+  const bgColor =
+    type === "pie" || type === "doughnut"
+      ? multiColors
+      : "rgba(0, 114, 206, 0.7)";
+  const borderColor =
+    type === "pie" || type === "doughnut"
+      ? multiColors
+      : "rgba(0, 114, 206, 1)";
 
   charts[id] = new Chart(ctx, {
     type: type,
     data: {
       labels,
-      datasets: [{
-        label: `${label} (%)`,
-        data: values,
-        backgroundColor: bgColor,
-        borderColor: borderColor,
-        borderWidth: 1,
-      }],
+      datasets: [
+        {
+          label: `${label} (%)`,
+          data: values,
+          backgroundColor: bgColor,
+          borderColor: borderColor,
+          borderWidth: 1,
+        },
+      ],
     },
     options: {
       responsive: true,
@@ -198,49 +294,54 @@ function renderChart(id, label, data, column, counterId, type = 'bar') {
           left: 10,
           right: 10,
           top: 10,
-          bottom: 10
-        }
+          bottom: 10,
+        },
       },
       plugins: {
         legend: {
-          position: 'bottom',
+          position: "bottom",
           labels: {
             boxWidth: 12,
             padding: 20,
             font: {
-              size: 10
-            }
-          }
+              size: 10,
+            },
+          },
         },
         tooltip: {
           callbacks: {
-            label: function(context) {
+            label: function (context) {
               const fullLabel = sortedEntries[context.dataIndex][0];
-              return `${fullLabel}: ${context.raw} (${percentages[context.dataIndex]})`;
+              return `${fullLabel}: ${context.raw} (${
+                percentages[context.dataIndex]
+              })`;
             },
           },
         },
       },
-      scales: type === 'bar' ? {
-        y: { 
-          beginAtZero: true,
-          ticks: {
-            autoSkip: true,
-            maxTicksLimit: 10
-          }
-        },
-        x: {
-          ticks: {
-            autoSkip: true,
-            maxRotation: 45,
-            minRotation: 45,
-            font: {
-              size: 10
+      scales:
+        type === "bar"
+          ? {
+              y: {
+                beginAtZero: true,
+                ticks: {
+                  autoSkip: true,
+                  maxTicksLimit: 10,
+                },
+              },
+              x: {
+                ticks: {
+                  autoSkip: true,
+                  maxRotation: 45,
+                  minRotation: 45,
+                  font: {
+                    size: 10,
+                  },
+                },
+              },
             }
-          }
-        }
-      } : {},
-    }
+          : {},
+    },
   });
 
   if (counterId) document.getElementById(counterId).textContent = total;
@@ -253,29 +354,52 @@ function renderGender(containerId, datasetKey) {
   const data = filteredData[datasetKey];
   const column = SHEETS[datasetKey].columns.sexo;
 
-  const male = data.filter((r) => r[column]?.toLowerCase().trim() === "hombre").length;
-  const female = data.filter((r) => r[column]?.toLowerCase().trim() === "mujer").length;
+  const male = data.filter((r) => {
+    const value = r[column]?.toLowerCase().trim();
+    return value === "hombre";
+  }).length;
+
+  const female = data.filter((r) => {
+    const value = r[column]?.toLowerCase().trim();
+    return value === "mujer";
+  }).length;
 
   const total = male + female;
-  document.getElementById(`${datasetKey}SexoCount`).textContent = total;
+
   container.querySelector(".male-count").textContent = male;
   container.querySelector(".female-count").textContent = female;
 
   if (total > 0) {
-    container.querySelector(".male-percentage").textContent = ((male / total) * 100).toFixed(1) + "%";
-    container.querySelector(".female-percentage").textContent = ((female / total) * 100).toFixed(1) + "%";
+    container.querySelector(".male-percentage").textContent =
+      ((male / total) * 100).toFixed(1) + "%";
+    container.querySelector(".female-percentage").textContent =
+      ((female / total) * 100).toFixed(1) + "%";
   } else {
     container.querySelector(".male-percentage").textContent = "0%";
     container.querySelector(".female-percentage").textContent = "0%";
   }
-}
 
+  // 🔷 Actualiza contador superior derecho según el dataset
+  if (datasetKey === "acciones") {
+    const counter = document.getElementById("accionesSexoCount");
+    if (counter) counter.textContent = total;
+  } else if (datasetKey === "procesos") {
+    const counter = document.getElementById("procesosIdentificaCount");
+    if (counter) counter.textContent = total;
+  }
+}
 document.querySelectorAll(".tab-button").forEach((btn) => {
   btn.addEventListener("click", () => {
-    document.querySelectorAll(".tab-button").forEach((b) => b.classList.remove("active"));
-    document.querySelectorAll(".tab-content").forEach((c) => c.classList.remove("active"));
+    document
+      .querySelectorAll(".tab-button")
+      .forEach((b) => b.classList.remove("active"));
+    document
+      .querySelectorAll(".tab-content")
+      .forEach((c) => c.classList.remove("active"));
     btn.classList.add("active");
-    document.getElementById(`${btn.dataset.tab}-content`).classList.add("active");
+    document
+      .getElementById(`${btn.dataset.tab}-content`)
+      .classList.add("active");
     populateFilters();
     applyFiltersAndRender();
   });
