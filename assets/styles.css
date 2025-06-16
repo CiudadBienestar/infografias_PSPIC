@@ -58,7 +58,28 @@ body {
   color: #334155;
   transition: all 0.3s ease;
 }
+.btn-clear-filters {
+  background-color: #e63946;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-bottom: 10px;
+  transition: background-color 0.3s ease;
+}
 
+.btn-clear-filters:hover {
+  background-color: #c92c3a;
+}
+
+.filters-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 10px;
+}
 .tab-button.active {
   background: linear-gradient(135deg, #003865, #0072ce);
   color: white;
@@ -292,4 +313,5 @@ body {
   .header h1 {
     font-size: 2rem;
   }
-}
+
+  }
