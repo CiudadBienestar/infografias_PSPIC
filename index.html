@@ -1,39 +1,44 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Infografías - PSPIC</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
-    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/CiudadBienestar/usuariosSICB/main/SICB.png">
-    <link rel="stylesheet" href="assets/styles.css">  
+    <link rel="icon" type="image/png"
+        href="https://raw.githubusercontent.com/CiudadBienestar/usuariosSICB/main/SICB.png">
+    <link rel="stylesheet" href="assets/styles.css">
 </head>
+
 <body>
     <div class="container">
-       <header class="header">
-  <img src="https://raw.githubusercontent.com/CiudadBienestar/usuariosSICB/main/Logos_Acciones_Colectivas.png"
-     alt="Logos Institucionales"
-     style="
-       max-width: 320px;
-       background: white;
-       padding: 12px 16px;
-       border-radius: 12px;
-       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-       margin-bottom: 20px;
-       display: block;
-       margin-left: auto;
-       margin-right: auto;
-     " />
+        <header class="header">
+            <img src="https://raw.githubusercontent.com/CiudadBienestar/usuariosSICB/main/Logos_Acciones_Colectivas.png"
+                alt="Logos Institucionales" style="
+                max-width: 320px;
+                background: white;
+                padding: 12px 16px;
+                border-radius: 12px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                margin-bottom: 20px;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+            " />
+            <h1>Plan de Salud Pública de Intervenciones Colectivas</h1>
+            <p>Análisis Gráfico Acciones Masivas e Informativas y Procesos Formativos</p>
+        </header>
 
-  <h1>Plan de Salud Pública de Intervenciones Colectivas</h1>
-  <p>Análisis Gráfico Acciones Masivas e Informativas y Procesos Formativos</p>
-</header>
+        <div class="tabs-container">            
+            <button class="tab-button active" data-tab="processos">Processos Formativos 🧩</button>
+            <button class="tab-button" data-tab="acciones">Acciones Masivas e Informativas 🎯</button>
+        </div>
 
-      <div class="tabs-container">
-      <button class="tab-button" data-tab="procesos">Procesos Formativos</button>
-      <button class="tab-button active" data-tab="acciones">Acciones Masivas e Informativas</button>      
-    </div>
+        <div class="filters-actions" style="display: flex; justify-content: flex-end; margin-bottom: 10px;">
+            <button id="clearFilters" class="btn-clear-filters">× Borrar filtros</button>
+        </div>
 
         <div class="filters-container">
             <div class="filter-group">
@@ -42,18 +47,21 @@
                     <option value="">Todos</option>
                 </select>
             </div>
+
             <div class="filter-group">
                 <label for="entornosFilter">Entornos Abordados</label>
                 <select id="entornosFilter" class="filter-select">
                     <option value="">Todos</option>
                 </select>
             </div>
+
             <div class="filter-group">
-                <label for="actividadFilter">Actividad/Proceso</label>
+                <label for="actividadFilter">Actividad/Process</label>
                 <select id="actividadFilter" class="filter-select">
                     <option value="">Todos</option>
                 </select>
             </div>
+
             <div class="filter-group">
                 <label for="zonaFilter">Zona</label>
                 <select id="zonaFilter" class="filter-select">
@@ -77,9 +85,10 @@
             </div>
             <div class="summary-card">
                 <div class="summary-number" id="totalZonas">0</div>
-                <div class="summary-label">Zonas Cubiertas</div>
+                <div class="summary-label">Actividades Realizadas</div>
             </div>
-        </div>       
+        </div>
+
         <div id="acciones-content" class="tab-content active">
             <div class="dashboard-grid">
                 <div class="chart-card">
@@ -145,24 +154,24 @@
             </div>
         </div>
 
-        <div id="procesos-content" class="tab-content">
+        <div id="processos-content" class="tab-content">
             <div class="dashboard-grid">
                 <div class="chart-card">
                     <div class="chart-header">
                         <h3 class="chart-title">Personas por Curso de Vida ⏳</h3>
-                        <span class="chart-count" id="procesosCursoCount">0</span>
+                        <span class="chart-count" id="processosCursoCount">0</span>
                     </div>
                     <div class="chart-container">
-                        <canvas id="procesosCursoChart"></canvas>
+                        <canvas id="processosCursoChart"></canvas>
                     </div>
                 </div>
 
                 <div class="chart-card">
                     <div class="chart-header">
                         <h3 class="chart-title">Se Identifican Como ⚧</h3>
-                        <span class="chart-count" id="procesosIdentificaCount">0</span>
+                        <span class="chart-count" id="processosIdentificaCount">0</span>
                     </div>
-                    <div class="gender-icons" id="procesosIdentificaContainer">
+                    <div class="gender-icons" id="processosIdentificaContainer">
                         <div class="gender-item">
                             <div class="gender-icon male-icon">🙋🏻‍♂️</div>
                             <div class="gender-label">Hombres</div>
@@ -181,88 +190,86 @@
                 <div class="chart-card">
                     <div class="chart-header">
                         <h3 class="chart-title">Preferencia Sexual 💓</h3>
-                        <span class="chart-count" id="procesosPreferenciaCount">0</span>
+                        <span class="chart-count" id="processosPreferenciaCount">0</span>
                     </div>
                     <div class="chart-container">
-                        <canvas id="procesosPreferenciaChart"></canvas>
+                        <canvas id="processosPreferenciaChart"></canvas>
                     </div>
                 </div>
 
                 <div class="chart-card">
                     <div class="chart-header">
                         <h3 class="chart-title">Personas por Etnia 👨🏻‍👩🏻‍👦🏻👨🏾‍👩🏾‍👦🏾</h3>
-                        <span class="chart-count" id="procesosEtniaCount">0</span>
+                        <span class="chart-count" id="processosEtniaCount">0</span>
                     </div>
                     <div class="chart-container">
-                        <canvas id="procesosEtniaChart"></canvas>
+                        <canvas id="processosEtniaChart"></canvas>
                     </div>
                 </div>
 
                 <div class="chart-card">
                     <div class="chart-header">
                         <h3 class="chart-title">Escolaridad 👨🏻‍🎓👩🏻‍🎓</h3>
-                        <span class="chart-count" id="procesosEscolaridadCount">0</span>
+                        <span class="chart-count" id="processosEscolaridadCount">0</span>
                     </div>
                     <div class="chart-container">
-                        <canvas id="procesosEscolaridadChart"></canvas>
+                        <canvas id="processosEscolaridadChart"></canvas>
                     </div>
                 </div>
 
                 <div class="chart-card">
                     <div class="chart-header">
-                        <h3 class="chart-title">Persona con Discapacidad 👨🏻‍🦽</h3>
-                        <span class="chart-count" id="procesosDiscapacidadCount">0</span>
+                        <h3 class="chart-title">Personas con Discapacidad 👨🏻‍🦽</h3>
+                        <span class="chart-count" id="processosDiscapacidadCount">0</span>
                     </div>
                     <div class="chart-container">
-                        <canvas id="procesosDiscapacidadChart"></canvas>
+                        <canvas id="processosDiscapacidadChart"></canvas>
                     </div>
                 </div>
 
                 <div class="chart-card">
                     <div class="chart-header">
                         <h3 class="chart-title">Personas por Zona de Residencia 🏡</h3>
-                        <span class="chart-count" id="procesosZonaCount">0</span>
+                        <span class="chart-count" id="processosZonaCount">0</span>
                     </div>
                     <div class="chart-container">
-                        <canvas id="procesosZonaChart"></canvas>
+                        <canvas id="processosZonaChart"></canvas>
                     </div>
                 </div>
 
                 <div class="chart-card">
                     <div class="chart-header">
                         <h3 class="chart-title">Personas por Comuna/Corregimiento 🏘️</h3>
-                        <span class="chart-count" id="procesosComunaCount">0</span>
+                        <span class="chart-count" id="processosComunaCount">0</span>
                     </div>
                     <div class="chart-container">
-                        <canvas id="procesosComunaChart"></canvas>
+                        <canvas id="processosComunaChart"></canvas>
                     </div>
                 </div>
 
                 <div class="chart-card">
                     <div class="chart-header">
                         <h3 class="chart-title">Tipo de Afiliación a Salud 🏥</h3>
-                        <span class="chart-count" id="procesosSaludCount">0</span>
+                        <span class="chart-count" id="processosSaludCount">0</span>
                     </div>
                     <div class="chart-container">
-                        <canvas id="procesosSaludChart"></canvas>
+                        <canvas id="processosSaludChart"></canvas>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-      </section>  
-      <script src="assets/dashboard.js"></script>
+
     <footer class="footer">
-  <div class="footer-content">
-    <div class="footer-logo-wrapper">
-      <img src="https://raw.githubusercontent.com/CiudadBienestar/usuariosSICB/main/SICB.png"
-           alt="Ciudad Bienestar"
-           class="footer-logo" />
-    </div>
-    <p>Plan de Salud Pública de Intervenciones Colectivas - 2025</p>
-  </div>
-</footer>
+        <div class="footer-content">
+            <div class="footer-logo-wrapper">
+                <img src="https://raw.githubusercontent.com/CiudadBienestar/usuariosSICB/main/SICB.png"
+                    alt="Ciudad Bienestar" class="footer-logo" />
+            </div>
+            <p>Plan de Salud Pública de Intervenciones Colectivas - 2025</p>
+    </footer>
 
-
+    <script src="/assets/dashboard.js"></script>
 </body>
+
 </html>
