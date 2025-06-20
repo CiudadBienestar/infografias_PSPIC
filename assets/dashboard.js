@@ -590,9 +590,12 @@ function renderChart(id, label, data, column, counterId, type = "bar") {
       warningNote.style.marginTop = "6px";
       chartCard.appendChild(warningNote);
     }
-    warningNote.innerHTML = invalidCount > 0
-      ? `<span class="icon">⚠️</span> <span class="text">${invalidCount} registro${invalidCount > 1 ? "s" : ""} sin dato</span>`
-      : "";
+   const porcentajeVacio = ((invalidCount / data.length) * 100).toFixed(1);
+warningNote.innerHTML =
+  invalidCount > 0
+    ? `<span class="icon">⚠️</span> <span class="text">${invalidCount} registro${invalidCount > 1 ? "s" : ""} sin dato (${porcentajeVacio}%)</span>`
+    : "";
+
   }
   // Agregar botón de descarga
   if (chartCard) {
@@ -718,9 +721,10 @@ function renderGender(containerId, datasetKey) {
       chartCard.appendChild(warningNote);
     }
 
+    const porcentajeVacio = ((registrosVacios / totalRegistros) * 100).toFixed(1);
     warningNote.innerHTML =
       registrosVacios > 0
-        ? `<span class="icon">⚠️</span> <span class="text">${registrosVacios} registro${registrosVacios > 1 ? "s" : ""} sin dato</span>`
+        ? `<span class="icon">⚠️</span> <span class="text">${registrosVacios} registro${registrosVacios > 1 ? "s" : ""} sin dato (${porcentajeVacio}%)</span>`
         : "";
   }
 }
