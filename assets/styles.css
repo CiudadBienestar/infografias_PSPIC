@@ -315,3 +315,32 @@ body {
   }
 
   }
+
+.missing-note {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: 0.78rem;
+  color: #e63946;
+  font-style: italic;
+  margin-top: 4px;
+  gap: 6px;
+  opacity: 0.9;
+  transition: all 0.3s ease-in-out;
+}
+
+.missing-note .icon {
+  font-size: 1rem;
+}
+
+.missing-note .text {
+  font-weight: 500;
+}
+
+.download-btn {
+  transition: background 0.3s ease;
+}
+
+.download-btn:hover {
+  background: #f0f0f0;
+}
