@@ -50,14 +50,18 @@ body {
 
 .tab-button {
   padding: 12px 24px;
-  background: #e2e8f0;
-  border: none;
-  border-radius: 8px;
+  background: #0f172a;
+  border: 2px solid #38bdf8;
+  /* Azul neón */
+  border-radius: 10px;
   cursor: pointer;
   font-weight: 600;
-  color: #334155;
-  transition: all 0.3s ease;
+  color: #e2e8f0;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 0 5px rgba(56, 189, 248, 0.3);
+  text-shadow: 0 0 2px rgba(255, 255, 255, 0.1);
 }
+
 .btn-clear-filters {
   background-color: #e63946;
   color: white;
@@ -80,14 +84,25 @@ body {
   align-items: center;
   margin-top: 10px;
 }
+
 .tab-button.active {
-  background: linear-gradient(135deg, #003865, #0072ce);
+  background: #1e3a8a;
   color: white;
-  box-shadow: 0 4px 20px rgba(0, 114, 206, 0.3);
+  box-shadow:
+    0 0 10px #3b82f6,
+    0 0 20px #3b82f6,
+    0 0 30px #3b82f6;
+  border-color: #3b82f6;
 }
 
 .tab-button:hover:not(.active) {
-  background: #cbd5e1;
+  background: #0f172a;
+  color: #ffffff;
+  box-shadow:
+    0 0 5px #38bdf8,
+    0 0 10px #38bdf8,
+    0 0 20px #38bdf8;
+  transform: scale(1.05);
 }
 
 /* === FILTROS === */
@@ -295,8 +310,15 @@ body {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (max-width: 768px) {
@@ -314,7 +336,7 @@ body {
     font-size: 2rem;
   }
 
-  }
+}
 
 .missing-note {
   display: flex;
@@ -343,4 +365,20 @@ body {
 
 .download-btn:hover {
   background: #f0f0f0;
+}
+
+#downloadReportBtn {
+  margin: 20px;
+  padding: 10px 20px;
+  background-color: #0072ce;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+#downloadReportBtn:hover {
+  background-color: #005999;
 }
