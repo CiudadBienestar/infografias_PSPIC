@@ -395,7 +395,7 @@ function renderCharts() {
     "Discapacidad",
     procData,
     SHEETS.processos.columns.discapacidad,
-    "processosDiscapacidadCount"
+    "processosDiscapacidadCount","pie"
   );
   updateChartCounter("processosDiscapacidadCount", procData, SHEETS.processos.columns.discapacidad);
 
@@ -406,7 +406,7 @@ function renderCharts() {
     procData,
     SHEETS.processos.columns.zona,
     "processosZonaCount",
-    "doughnut"
+    "pie"
   );
   updateChartCounter("processosZonaCount", procData, SHEETS.processos.columns.zona);
 
@@ -807,7 +807,7 @@ async function renderAllChartsForPDF() {
     renderChart("accionesEtniaChart", "Etnia", accData, SHEETS.acciones.columns.etnia, "accionesEtniaCount", "bar", true);
     document.getElementById("accionesEtniaChart")?.offsetHeight;
 
-    renderChart("accionesZonaChart", "Zona", accData, SHEETS.acciones.columns.zona, "accionesZonaCount", "bar", true);
+    renderChart("accionesZonaChart", "Zona", accData, SHEETS.acciones.columns.zona, "accionesZonaCount", "pie", true);
     document.getElementById("accionesZonaChart")?.offsetHeight;
 
     renderChart("accionesComunaChart", "Comuna", accData, SHEETS.acciones.columns.comuna, "accionesComunaCount", "bar", true);
@@ -827,16 +827,16 @@ async function renderAllChartsForPDF() {
     renderChart("processosEscolaridadChart", "Escolaridad", procData, SHEETS.processos.columns.escolaridad, "processosEscolaridadCount", "bar", true);
     document.getElementById("processosEscolaridadChart")?.offsetHeight;
 
-    renderChart("processosDiscapacidadChart", "Discapacidad", procData, SHEETS.processos.columns.discapacidad, "processosDiscapacidadCount", "bar", true);
+    renderChart("processosDiscapacidadChart", "Discapacidad", procData, SHEETS.processos.columns.discapacidad, "processosDiscapacidadCount", "pie", true);
     document.getElementById("processosDiscapacidadChart")?.offsetHeight;
 
-    renderChart("processosZonaChart", "Zona", procData, SHEETS.processos.columns.zona, "processosZonaCount", "bar", true);
+    renderChart("processosZonaChart", "Zona", procData, SHEETS.processos.columns.zona, "processosZonaCount", "pie", true);
     document.getElementById("processosZonaChart")?.offsetHeight;
 
     renderChart("processosComunaChart", "Comuna", procData, SHEETS.processos.columns.comuna, "processosComunaCount", "bar", true);
     document.getElementById("processosComunaChart")?.offsetHeight;
 
-    renderChart("processosSaludChart", "Afiliación a Salud", procData, SHEETS.processos.columns.salud, "processosSaludCount", "bar", true);
+    renderChart("processosSaludChart", "Afiliación a Salud", procData, SHEETS.processos.columns.salud, "processosSaludCount", "pie", true);
     document.getElementById("processosSaludChart")?.offsetHeight;
   }
   await new Promise(resolve => setTimeout(resolve, 400));
@@ -1457,7 +1457,7 @@ async function renderAllChartsForPDF() {
       try {
         renderChart("accionesCursoChart", "Curso de Vida", accData, SHEETS.acciones?.columns?.curso, "accionesCursoCount", "bar", true);
         renderChart("accionesEtniaChart", "Etnia", accData, SHEETS.acciones?.columns?.etnia, "accionesEtniaCount", "bar", true);
-        renderChart("accionesZonaChart", "Zona", accData, SHEETS.acciones?.columns?.zona, "accionesZonaCount", "bar", true);
+        renderChart("accionesZonaChart", "Zona", accData, SHEETS.acciones?.columns?.zona, "accionesZonaCount", "pie", true);
         renderChart("accionesComunaChart", "Comuna", accData, SHEETS.acciones?.columns?.comuna, "accionesComunaCount", "bar", true);
       } catch (e) {
         console.warn('Error renderizando gráficos de acciones:', e);
@@ -1470,10 +1470,10 @@ async function renderAllChartsForPDF() {
         renderChart("processosPreferenciaChart", "Preferencia Sexual", procData, SHEETS.processos?.columns?.preferencia, "processosPreferenciaCount", "bar", true);
         renderChart("processosEtniaChart", "Etnia", procData, SHEETS.processos?.columns?.etnia, "processosEtniaCount", "bar", true);
         renderChart("processosEscolaridadChart", "Escolaridad", procData, SHEETS.processos?.columns?.escolaridad, "processosEscolaridadCount", "bar", true);
-        renderChart("processosDiscapacidadChart", "Discapacidad", procData, SHEETS.processos?.columns?.discapacidad, "processosDiscapacidadCount", "bar", true);
-        renderChart("processosZonaChart", "Zona", procData, SHEETS.processos?.columns?.zona, "processosZonaCount", "bar", true);
+        renderChart("processosDiscapacidadChart", "Discapacidad", procData, SHEETS.processos?.columns?.discapacidad, "processosDiscapacidadCount", "pie", true);
+        renderChart("processosZonaChart", "Zona", procData, SHEETS.processos?.columns?.zona, "processosZonaCount", "pie", true);
         renderChart("processosComunaChart", "Comuna", procData, SHEETS.processos?.columns?.comuna, "processosComunaCount", "bar", true);
-        renderChart("processosSaludChart", "Afiliación a Salud", procData, SHEETS.processos?.columns?.salud, "processosSaludCount", "bar", true);
+        renderChart("processosSaludChart", "Afiliación a Salud", procData, SHEETS.processos?.columns?.salud, "processosSaludCount", "pie", true);
       } catch (e) {
         console.warn('Error renderizando gráficos de procesos:', e);
       }
